@@ -1,0 +1,14 @@
+[
+    {"id": 1, "nombre":"Red Velvet", "precio": 2750, "imagen": "red-velvet.jpg", "category": "Tortas"},
+    {"id": 2, "nombre":"Chocotorta", "precio": 2000, "imagen": "chocotorta.jpg", "category": "Tortas"},
+    {"id": 3, "nombre":"Oreo", "precio": 20000, "imagen": "oreo.jpg", "category": "Tortas"},
+    {"id": 4, "nombre":"Tarta de frutillas", "precio": 3000, "imagen": "tarta-frutillas.jpg", "category": "Tartas"},
+    {"id": 5, "nombre":"Merengada", "precio": 1500, "imagen": "merengada.jpg", "category": "Tartas"},
+    {"id": 6, "nombre":"Brownie", "precio": 1500, "imagen": "brownie.jpg", "category": "Tartas"},
+    {"id": 7, "nombre":"Pastafrola", "precio": 800, "imagen": "pastafrola.jpg", "category": "Tartas"},
+    {"id": 8, "nombre":"Selva Negra", "precio": 2500, "imagen": "selva-negra.jpg", "category": "Tortas"},
+    {"id": 9, "nombre":"Pastel del Diablo", "precio": 2250, "imagen": "diablo.jpg", "category": "Tortas"},
+    {"id": 10, "nombre":"Frutos del Bosque", "precio": 3000, "imagen": "frutos-rojos.jpg", "category": "Tortas"},
+    {"id": 11, "nombre":"Cheesecake", "precio": 2350, "imagen": "cheesecake.jpg", "category": "Tortas"},
+    {"id": 12, "nombre":"Torta Balcarce", "precio": 2500, "imagen": "balcarce.jpg", "category": "Tortas"}
+]
