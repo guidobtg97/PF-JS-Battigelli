@@ -275,3 +275,36 @@ footer .copyright{
 .anchor:hover{
     color: white;
 }
+
+
+.ticket-compra {
+    position: absolute;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:center;
+    background-color: rgb(232, 221, 154);
+    left: 40px;
+    top: 240px;
+    height: 80px;
+    max-width: 270px;
+    
+   
+}
+
+.ticket-compra button {
+    max-height: 40px;
+    max-width: 75px;
+}
+
+#total-price {
+ 
+    color: #222;
+ 
+}
+
+.empty-cart{
+    height: 500px;
+    background: red;
+    width: 500px;
+}

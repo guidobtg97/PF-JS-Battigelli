@@ -98,7 +98,33 @@ function agregarProducto(id){
     }
     
     guardarProductosCarrito(productos_carrito);
+    renderProductosCarrito();
     actualizarBotonCarrito();
+}
+
+function eliminarProducto(id){
+    const productos_carrito = cargarProductosCarrito();
+    let pos = productos_carrito.findIndex(item => item.id === id);
+    productos_carrito[pos].cantidad -= 1;
+
+    if ( productos_carrito[pos].cantidad == 0){
+        productos_carrito.splice(pos, 1);
+    }
+    
+    guardarProductosCarrito(productos_carrito);
+    renderProductosCarrito();
+    actualizarBotonCarrito();
+}
+
+function eliminarItem(id){
+    renderProductosCarrito();
+    eliminarProducto(id);
+    
+}
+
+function agregarItem(id){
+    renderProductosCarrito();
+    agregarProducto(id);
 }
 
 
@@ -108,14 +134,29 @@ function actualizarBotonCarrito(){
 
     let contenido = `<button type="button" class="btn position-relative">
     <img src="img/carrito.png" alt="Carrito" width="32px">
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">${total}</span>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">${totalProductos()}</span>
     </button>`;
 
     document.getElementById("boton_carrito").innerHTML = contenido;
 }
 
+function totalProductos() {
+    const productos_carrito = cargarProductosCarrito();
+
+    return productos_carrito.reduce((acumulador, prod) => acumulador  + prod.cantidad, 0)
+
+}
+
+function totalAPagar() {
+    const productos_carrito = cargarProductosCarrito();
+
+    return productos_carrito.reduce((acumulador, prod) => acumulador  + (prod.cantidad * prod.precio), 0)
+
+}
+
 /* PROCESAMIENTO DE FORMULARIOS */
 
+/*
 function procesarRegistro() {
     
     let nombre = document.getElementById("name").value;
@@ -144,6 +185,7 @@ function procesarRegistro() {
     }
 
 }
+*/
 
 function mostrarEnvios(){
     Swal.fire(
@@ -151,6 +193,8 @@ function mostrarEnvios(){
         'Se realizan envios todos los días a todo GBA y CABA. Precio a convenir según la zona.',
         'question'
       )
+      ultimaPos(productos)
+      
 }
 
 function mostrarError(dato){
@@ -160,7 +204,12 @@ function mostrarError(dato){
         text: 'Debes completar el campo: ' + dato,
         timer: 5000
       })
+      
+      
 }
+
+
+
 
 /* LLAMADO Y EJECUCIÓN DE FUNCIOONES */
 
