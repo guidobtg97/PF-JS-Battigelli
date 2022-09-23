@@ -13,6 +13,8 @@ let productos = [
     {id: 12, nombre: "Torta Balcarce", precio: 2500, imagen: "balcarce.jpg", category: "Tortas"}
 ];
 
+
+
 /* FUNCIONES ARRAY DE PRODUCTOS Y RENDERIZADO */
 
 function guardarProductosLS(productos){
@@ -130,7 +132,6 @@ function agregarItem(id){
 
 function actualizarBotonCarrito(){
     const productos_carrito = cargarProductosCarrito();
-    let total = productos_carrito.length;
 
     let contenido = `<button type="button" class="btn position-relative">
     <img src="img/carrito.png" alt="Carrito" width="32px">
@@ -156,14 +157,29 @@ function totalAPagar() {
 
 /* PROCESAMIENTO DE FORMULARIOS */
 
-/*
+let usuarios = [];
+
+function guardarUsuarioLS(usuarios){
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+}
+
+function cargarUsuariosLS(){
+    return JSON.parse(localStorage.getItem("usuarios")) || [];
+}
+
+function procesarFormulario(){
+    let proceso = document.getElementById("btn-register");
+    proceso.addEventListener("click", procesarRegistro);  
+}
+
 function procesarRegistro() {
-    
+
+    const nuevo_usuario = cargarUsuariosLS();
     let nombre = document.getElementById("name").value;
     let apellido = document.getElementById("surname").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-
+    
     if (nombre.trim() === null  || nombre.trim() === "" || nombre.length < 2){
         mostrarError("Nombre")
         return false
@@ -184,17 +200,46 @@ function procesarRegistro() {
         return false
     }
 
+    let usuario = {nombre: nombre, apellido: apellido, email: email, password: password};
+
+    console.log(usuario.nombre);
+    nuevo_usuario.push(usuario);
+    guardarUsuarioLS(nuevo_usuario);
+
 }
-*/
+
+function procesarSesion(){
+    let proceso = document.getElementById("login-btn");
+    proceso.addEventListener("click", buscarUsuario);  
+}
+
+function buscarUsuario(){
+    const productos = cargarUsuariosLS();
+    
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    const busqueda = productos.find(usuario => usuario.email === email && usuario.password === password)
+
+    
+        if(busqueda == true){
+            console.log("Iniciaste sesión correctamente")
+        }else(
+            console.log("No existe usuario con esos datos")
+        )
+   
+
+
+}
+
+/* SWEET ALERTS */
 
 function mostrarEnvios(){
     Swal.fire(
         'Envios',
         'Se realizan envios todos los días a todo GBA y CABA. Precio a convenir según la zona.',
         'question'
-      )
-      ultimaPos(productos)
-      
+      )   
 }
 
 function mostrarError(dato){
@@ -203,9 +248,7 @@ function mostrarError(dato){
         title: 'Error',
         text: 'Debes completar el campo: ' + dato,
         timer: 5000
-      })
-      
-      
+      })     
 }
 
 
@@ -217,3 +260,4 @@ function mostrarError(dato){
 guardarProductosLS(productos);
 renderProductos();
 actualizarBotonCarrito();
+
