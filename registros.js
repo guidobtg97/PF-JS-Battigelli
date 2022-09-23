@@ -1,8 +1,17 @@
 function mostrarError(dato){
     Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'Debes completar el campo: ' + dato,
+        title: '¡Intenta de nuevo!',
+        text: 'Dato erróneo: ' + dato,
+        timer: 5000
+      })     
+}
+
+function sesionFallida(dato){
+    Swal.fire({
+        icon: 'error',
+        title: '¡Intenta de nuevo!',
+        text: 'Email o contraseña equivocados.',
         timer: 5000
       })     
 }
@@ -81,7 +90,7 @@ function buscarUsuario(){
     const busqueda = productos.find(usuario => usuario.email === email && usuario.password === password)
 
     if (busqueda === undefined){
-        mostrarError("Email")
+        sesionFallida()
         return false
     }else if(busqueda.email === email && busqueda.password === password){
         sesionExitosa(busqueda)
