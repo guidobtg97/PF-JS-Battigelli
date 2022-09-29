@@ -1,3 +1,4 @@
+
 function renderProductosCarrito(){
   const productos = cargarProductosCarrito();
   let contenido = "";
@@ -30,7 +31,7 @@ function renderProductosCarrito(){
         <tr>
           <td><b>Total a pagar</b></td>
           <td id="total-price">: $${totalAPagar()}</td>
-          <button class="btn" id="btn-render">Pagar</button>  
+          <button class="btn" id="btn-render" onclick="cuponPago()">Pagar</button>  
         </tr>
       </table>
       </div>
@@ -38,6 +39,18 @@ function renderProductosCarrito(){
     }
     document.getElementById("productos").innerHTML = contenido;
 }
+
+function cuponPago(){
+  Swal.fire({
+    title: '¡Gracias por tu compra!',
+    text: 'En breve enviaremos los datos de facturación a tú correo.',
+    imageUrl: 'https://res.cloudinary.com/da2dft2hn/image/upload/v1664492394/logo_usi2wx.png',
+    imageWidth: 200,
+    imageHeight: 200,
+    imageAlt: 'Custom image',
+  })
+}
+
 
 renderProductosCarrito(); 
 

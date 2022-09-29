@@ -1,7 +1,7 @@
 let productos = [
     {id: 1, nombre: "Red Velvet", precio: 2750, imagen: "red-velvet.jpg", category: "Tortas"},
     {id: 2, nombre: "Chocotorta", precio: 2000, imagen: "chocotorta.jpg", category: "Tortas"},
-    {id: 3, nombre: "Oreo", precio: 20000, imagen: "oreo.jpg", category: "Tortas"},
+    {id: 3, nombre: "Oreo", precio: 2000, imagen: "oreo.jpg", category: "Tortas"},
     {id: 4, nombre: "Tarta de frutillas", precio: 3000, imagen: "tarta-frutillas.jpg", category: "Tartas"},
     {id: 5, nombre: "Merengada", precio: 1500, imagen: "merengada.jpg", category: "Tartas"},
     {id: 6, nombre: "Brownie", precio: 1500, imagen: "brownie.jpg", category: "Tartas"},
@@ -156,81 +156,6 @@ function totalAPagar() {
 }
 
 /* PROCESAMIENTO DE FORMULARIOS */
-
-let usuarios = [];
-
-function guardarUsuarioLS(usuarios){
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-}
-
-function cargarUsuariosLS(){
-    return JSON.parse(localStorage.getItem("usuarios")) || [];
-}
-
-function procesarFormulario(){
-    let proceso = document.getElementById("btn-register");
-    proceso.addEventListener("click", procesarRegistro);  
-}
-
-function procesarRegistro() {
-
-    const nuevo_usuario = cargarUsuariosLS();
-    let nombre = document.getElementById("name").value;
-    let apellido = document.getElementById("surname").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    
-    if (nombre.trim() === null  || nombre.trim() === "" || nombre.length < 2){
-        mostrarError("Nombre")
-        return false
-    }
-
-    if (apellido.trim() === null  || apellido.trim() === "" || apellido.length < 2){
-        mostrarError("Apellido")
-        return false
-    }
-
-    if (email.trim() === null  || email.trim() === ""){
-        mostrarError("Email")
-        return false
-    }
-
-    if (password.trim() === null  || password.trim() === "" || password.length < 8){
-        mostrarError("Contraseña")
-        return false
-    }
-
-    let usuario = {nombre: nombre, apellido: apellido, email: email, password: password};
-
-    console.log(usuario.nombre);
-    nuevo_usuario.push(usuario);
-    guardarUsuarioLS(nuevo_usuario);
-
-}
-
-function procesarSesion(){
-    let proceso = document.getElementById("login-btn");
-    proceso.addEventListener("click", buscarUsuario);  
-}
-
-function buscarUsuario(){
-    const productos = cargarUsuariosLS();
-    
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    const busqueda = productos.find(usuario => usuario.email === email && usuario.password === password)
-
-    
-        if(busqueda == true){
-            console.log("Iniciaste sesión correctamente")
-        }else(
-            console.log("No existe usuario con esos datos")
-        )
-   
-
-
-}
 
 /* SWEET ALERTS */
 
