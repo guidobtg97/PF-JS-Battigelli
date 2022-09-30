@@ -7,6 +7,23 @@ function mostrarError(dato){
       })     
 }
 
+function registroExitoso(dato){
+    Swal.fire(
+        'Bienvenidx ' + dato.nombre,
+        'Te registraste exitosamente y ya podes iniciar sesión',
+        'success'
+      )
+}
+
+function registroFallido(){
+    Swal.fire({
+        icon: 'error',
+        title: '¡Intenta de nuevo!',
+        text: 'Ya existe una cuenta con esos datos',
+        timer: 5000
+      })   
+}
+
 function sesionFallida(dato){
     Swal.fire({
         icon: 'error',
@@ -43,6 +60,7 @@ function procesarFormulario(){
 function procesarRegistro() {
 
     const nuevo_usuario = cargarUsuariosLS();
+    
     let nombre = document.getElementById("name").value;
     let apellido = document.getElementById("surname").value;
     let email = document.getElementById("email").value;
@@ -68,12 +86,21 @@ function procesarRegistro() {
         return false
     }
 
-    let usuario = {nombre: nombre, apellido: apellido, email: email, password: password};
+   
 
-    console.log(usuario.nombre);
-    nuevo_usuario.push(usuario);
-    guardarUsuarioLS(nuevo_usuario);
+    const busqueda = nuevo_usuario.find(usuario => usuario.email === email);
 
+    if (busqueda === undefined){
+        let usuario = {nombre: nombre, apellido: apellido, email: email, password: password};
+        nuevo_usuario.push(usuario);
+        guardarUsuarioLS(nuevo_usuario);
+        registroExitoso(usuario);
+    
+    }else {
+        registroFallido()
+    }
+
+   
 }
 
 function procesarSesion(){
@@ -82,12 +109,12 @@ function procesarSesion(){
 }
 
 function buscarUsuario(){
-    const productos = cargarUsuariosLS();
+    const usuarios = cargarUsuariosLS();
     
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    const busqueda = productos.find(usuario => usuario.email === email && usuario.password === password)
+    const busqueda = usuarios.find(usuario => usuario.email === email && usuario.password === password)
 
     if (busqueda === undefined){
         sesionFallida()
