@@ -1,3 +1,5 @@
+
+
 function mostrarError(dato){
     Swal.fire({
         icon: 'error',
@@ -36,7 +38,7 @@ function sesionFallida(dato){
 function sesionExitosa(dato){
     Swal.fire(
         'Bienvenidx ' + dato.nombre,
-        'Iniciaste sesión correctamente!',
+        'Iniciaste sesión correctamente. Seras redireccionado al carrito',
         'success'
       )
 }
@@ -86,8 +88,6 @@ function procesarRegistro() {
         return false
     }
 
-   
-
     const busqueda = nuevo_usuario.find(usuario => usuario.email === email);
 
     if (busqueda === undefined){
@@ -95,6 +95,9 @@ function procesarRegistro() {
         nuevo_usuario.push(usuario);
         guardarUsuarioLS(nuevo_usuario);
         registroExitoso(usuario);
+        setTimeout(() => {
+            location.href='https://guidobtg97.github.io/PF-JS-Battigelli/login.html'
+        }, 5000);
     
     }else {
         registroFallido()
@@ -102,6 +105,8 @@ function procesarRegistro() {
 
    
 }
+
+
 
 function procesarSesion(){
     let proceso = document.getElementById("login-btn");
@@ -121,5 +126,10 @@ function buscarUsuario(){
         return false
     }else if(busqueda.email === email && busqueda.password === password){
         sesionExitosa(busqueda)
+        setTimeout(() => {
+            location.href='https://guidobtg97.github.io/PF-JS-Battigelli/tienda.html'
+        }, 5000);
     }
 }
+
+
